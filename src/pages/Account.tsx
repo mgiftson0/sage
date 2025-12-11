@@ -10,14 +10,14 @@ const orders = [
     id: "AF-001234",
     date: "Dec 5, 2024",
     status: "Delivered",
-    total: 480,
+    total: 1270,
     items: 2,
   },
   {
     id: "AF-001189",
     date: "Nov 22, 2024",
     status: "In Transit",
-    total: 285,
+    total: 850,
     items: 1,
   },
 ];
@@ -31,7 +31,7 @@ const menuItems = [
 
 export default function Account() {
   const [activeTab, setActiveTab] = useState("orders");
-  const [isLoggedIn] = useState(true);
+  const [isLoggedIn] = useState(false);
 
   if (!isLoggedIn) {
     return (
@@ -46,52 +46,32 @@ export default function Account() {
               className="text-center mb-12"
             >
               <h1 className="font-display text-3xl lg:text-4xl font-medium text-foreground mb-4">
-                Welcome Back
+                Akwaaba
               </h1>
               <p className="text-muted-foreground">
                 Sign in to access your account
               </p>
             </motion.div>
 
-            <motion.form
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="space-y-6"
+              className="space-y-4"
             >
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 border border-border bg-background text-foreground focus:outline-none focus:border-primary transition-colors"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="w-full px-4 py-3 border border-border bg-background text-foreground focus:outline-none focus:border-primary transition-colors"
-                  placeholder="••••••••"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground py-4 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors"
+              <Link
+                to="/auth"
+                className="block w-full bg-primary text-primary-foreground py-4 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors text-center"
               >
                 Sign In
-              </button>
-              <p className="text-center text-sm text-muted-foreground">
-                Don't have an account?{" "}
-                <button className="text-foreground hover:text-primary underline transition-colors">
-                  Create one
-                </button>
-              </p>
-            </motion.form>
+              </Link>
+              <Link
+                to="/auth"
+                className="block w-full border border-border py-4 font-medium tracking-elegant uppercase text-sm hover:bg-secondary transition-colors text-center text-foreground"
+              >
+                Create Account
+              </Link>
+            </motion.div>
           </div>
         </main>
 
@@ -115,9 +95,9 @@ export default function Account() {
               <User className="w-10 h-10 text-primary" />
             </div>
             <h1 className="font-display text-3xl font-medium text-foreground mb-2">
-              Hello, Sarah
+              Hello, Akua
             </h1>
-            <p className="text-muted-foreground">sarah@example.com</p>
+            <p className="text-muted-foreground">akua@example.com</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
@@ -207,7 +187,7 @@ export default function Account() {
                             <p className="text-sm text-muted-foreground">
                               {order.items} {order.items === 1 ? "item" : "items"}
                             </p>
-                            <p className="font-medium text-foreground">${order.total}</p>
+                            <p className="font-medium text-foreground">GH₵{order.total.toLocaleString()}</p>
                           </div>
                         </div>
                       ))}
@@ -227,12 +207,12 @@ export default function Account() {
                     Saved Addresses
                   </h2>
                   <div className="p-6 border border-border bg-card">
-                    <p className="font-medium text-foreground mb-1">Sarah Johnson</p>
+                    <p className="font-medium text-foreground mb-1">Akua Mensah</p>
                     <p className="text-muted-foreground text-sm">
-                      123 Main Street<br />
-                      Apt 4B<br />
-                      New York, NY 10001<br />
-                      United States
+                      House 15, Nyaniba Estates<br />
+                      Osu, Accra<br />
+                      Greater Accra Region<br />
+                      Ghana
                     </p>
                     <div className="flex gap-4 mt-4">
                       <button className="text-sm text-primary hover:underline">Edit</button>
@@ -250,19 +230,36 @@ export default function Account() {
                   <h2 className="font-display text-2xl font-medium text-foreground mb-6">
                     Payment Methods
                   </h2>
-                  <div className="p-6 border border-border bg-card">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-8 bg-secondary rounded flex items-center justify-center text-xs font-medium">
-                        VISA
+                  <div className="space-y-4">
+                    <div className="p-6 border border-border bg-card">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-8 bg-yellow-400 rounded flex items-center justify-center text-xs font-bold text-black">
+                          MTN
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground">MTN Mobile Money</p>
+                          <p className="text-sm text-muted-foreground">024 •••• ••89</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-medium text-foreground">•••• •••• •••• 4242</p>
-                        <p className="text-sm text-muted-foreground">Expires 12/26</p>
+                      <div className="flex gap-4 mt-4">
+                        <button className="text-sm text-primary hover:underline">Edit</button>
+                        <button className="text-sm text-destructive hover:underline">Delete</button>
                       </div>
                     </div>
-                    <div className="flex gap-4 mt-4">
-                      <button className="text-sm text-primary hover:underline">Edit</button>
-                      <button className="text-sm text-destructive hover:underline">Delete</button>
+                    <div className="p-6 border border-border bg-card">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-8 bg-secondary rounded flex items-center justify-center text-xs font-medium">
+                          VISA
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground">•••• •••• •••• 4242</p>
+                          <p className="text-sm text-muted-foreground">Expires 12/26</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-4 mt-4">
+                        <button className="text-sm text-primary hover:underline">Edit</button>
+                        <button className="text-sm text-destructive hover:underline">Delete</button>
+                      </div>
                     </div>
                   </div>
                   <button className="mt-4 text-sm text-foreground hover:text-primary underline transition-colors">

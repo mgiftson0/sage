@@ -9,22 +9,22 @@ import { Newsletter } from "@/components/Newsletter";
 const products = {
   "1": {
     id: "1",
-    name: "Sage Linen Blazer",
-    price: 285,
-    description: "Crafted from premium European linen, this relaxed-fit blazer embodies effortless sophistication. Perfect for warm days and cool evenings.",
+    name: "Royal Kente Blazer",
+    price: 850,
+    description: "Handwoven by master artisans in Bonwire, Ashanti Region, this stunning Kente blazer features traditional Adinkra symbols representing wisdom and strength. A statement piece for special occasions.",
     details: [
-      "100% European Linen",
-      "Relaxed fit",
-      "Single-breasted design",
-      "Two front pockets",
-      "Made in Portugal",
+      "100% Handwoven Kente Cloth",
+      "Made by Bonwire artisans",
+      "Traditional Adinkra patterns",
+      "Silk lining",
+      "Made in Ghana",
     ],
-    care: "Dry clean recommended. Iron on medium heat.",
+    care: "Dry clean only. Store flat to preserve weave integrity.",
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: [
-      { name: "Sage", hex: "#9CAF88" },
-      { name: "Ivory", hex: "#F5F5DC" },
-      { name: "Stone", hex: "#D4C5B9" },
+      { name: "Gold & Green", hex: "#DAA520" },
+      { name: "Red & Black", hex: "#8B0000" },
+      { name: "Blue & Gold", hex: "#1E3A5F" },
     ],
     images: [
       "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&auto=format&fit=crop",
@@ -34,25 +34,48 @@ const products = {
   },
   "2": {
     id: "2",
-    name: "Organic Cotton Dress",
-    price: 195,
-    description: "A timeless midi dress in organic cotton, featuring a flattering A-line silhouette and thoughtful details that elevate everyday dressing.",
+    name: "Ankara Print Dress",
+    price: 420,
+    description: "A flowing midi dress crafted from premium African wax print fabric. Features a flattering wrap silhouette with traditional Ghanaian patterns celebrating our rich cultural heritage.",
     details: [
-      "100% Organic Cotton",
-      "A-line silhouette",
+      "100% Premium African Wax Print",
+      "Wrap-style silhouette",
       "Hidden side pockets",
-      "Back zip closure",
-      "Made in Italy",
+      "Adjustable tie waist",
+      "Handmade in Accra",
     ],
-    care: "Machine wash cold. Hang dry.",
+    care: "Machine wash cold, gentle cycle. Hang dry.",
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: [
-      { name: "Forest", hex: "#6B8E6B" },
-      { name: "Cream", hex: "#FFFDD0" },
+      { name: "Sunset Orange", hex: "#E65C00" },
+      { name: "Ocean Blue", hex: "#0077BE" },
     ],
     images: [
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&auto=format&fit=crop",
+    ],
+  },
+  "3": {
+    id: "3",
+    name: "Fugu Northern Smock",
+    price: 380,
+    description: "Traditional hand-woven smock from Northern Ghana, known locally as Batakari or Fugu. This cultural masterpiece is made using centuries-old techniques passed down through generations.",
+    details: [
+      "Hand-woven cotton strips",
+      "Traditional Northern Ghana design",
+      "Hand-embroidered neckline",
+      "Unisex styling",
+      "Made in Tamale",
+    ],
+    care: "Hand wash recommended. Air dry in shade.",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Natural White", hex: "#F5F5DC" },
+      { name: "Earth Brown", hex: "#8B4513" },
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&auto=format&fit=crop",
     ],
   },
 };
@@ -128,7 +151,7 @@ export default function ProductDetail() {
               <h1 className="font-display text-3xl lg:text-4xl font-medium text-foreground mb-4">
                 {product.name}
               </h1>
-              <p className="text-2xl text-foreground mb-6">${product.price}</p>
+              <p className="text-2xl text-foreground mb-6">GH₵{product.price.toLocaleString()}</p>
               <p className="text-muted-foreground leading-relaxed mb-8">
                 {product.description}
               </p>
@@ -230,15 +253,15 @@ export default function ProductDetail() {
               <div className="grid grid-cols-3 gap-4 py-8 border-t border-b border-border mb-8">
                 <div className="text-center">
                   <Truck className="w-5 h-5 mx-auto mb-2 text-primary" />
-                  <p className="text-xs text-muted-foreground">Free Shipping</p>
+                  <p className="text-xs text-muted-foreground">Free Ghana Delivery</p>
                 </div>
                 <div className="text-center">
                   <RotateCcw className="w-5 h-5 mx-auto mb-2 text-primary" />
-                  <p className="text-xs text-muted-foreground">30-Day Returns</p>
+                  <p className="text-xs text-muted-foreground">14-Day Returns</p>
                 </div>
                 <div className="text-center">
                   <Shield className="w-5 h-5 mx-auto mb-2 text-primary" />
-                  <p className="text-xs text-muted-foreground">2-Year Warranty</p>
+                  <p className="text-xs text-muted-foreground">Authenticity Guaranteed</p>
                 </div>
               </div>
 

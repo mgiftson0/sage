@@ -4,15 +4,14 @@ import { Filter, Grid, LayoutGrid, ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { FeaturedProducts } from "@/components/FeaturedProducts";
 import { Newsletter } from "@/components/Newsletter";
 
 const categories = [
   "All",
-  "Tops",
-  "Bottoms",
+  "Kente",
+  "Ankara",
+  "Batakari",
   "Dresses",
-  "Outerwear",
   "Accessories",
 ];
 
@@ -26,74 +25,66 @@ const sortOptions = [
 const allProducts = [
   {
     id: 1,
-    name: "The Essential Blazer",
-    price: 485,
-    category: "Outerwear",
-    image:
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=2000&auto=format&fit=crop",
+    name: "Royal Kente Blazer",
+    price: 850,
+    category: "Kente",
+    image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=2000&auto=format&fit=crop",
     isNew: true,
   },
   {
     id: 2,
-    name: "Linen Wide Trousers",
-    price: 295,
-    category: "Bottoms",
-    image:
-      "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?q=80&w=1974&auto=format&fit=crop",
+    name: "Ankara Wide Leg Pants",
+    price: 320,
+    category: "Ankara",
+    image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?q=80&w=1974&auto=format&fit=crop",
     isNew: false,
   },
   {
     id: 3,
-    name: "Merino Knit Sweater",
-    price: 345,
-    category: "Tops",
-    image:
-      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=2005&auto=format&fit=crop",
+    name: "Traditional Fugu Smock",
+    price: 380,
+    category: "Batakari",
+    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=2005&auto=format&fit=crop",
     isNew: true,
   },
   {
     id: 4,
-    name: "Organic Cotton Shirt",
-    price: 195,
-    category: "Tops",
-    image:
-      "https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=1974&auto=format&fit=crop",
+    name: "Adinkra Symbol Shirt",
+    price: 245,
+    category: "Kente",
+    image: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=1974&auto=format&fit=crop",
     isNew: false,
   },
   {
     id: 5,
-    name: "Silk Midi Dress",
-    price: 550,
+    name: "Ankara Midi Dress",
+    price: 420,
     category: "Dresses",
-    image:
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1962&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1962&auto=format&fit=crop",
     isNew: true,
   },
   {
     id: 6,
-    name: "Wool Overcoat",
-    price: 695,
-    category: "Outerwear",
-    image:
-      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1936&auto=format&fit=crop",
+    name: "Kente Agbada Set",
+    price: 1200,
+    category: "Kente",
+    image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1936&auto=format&fit=crop",
     isNew: false,
   },
   {
     id: 7,
-    name: "Cashmere Scarf",
-    price: 175,
+    name: "Handwoven Kente Scarf",
+    price: 180,
     category: "Accessories",
-    image:
-      "https://images.unsplash.com/photo-1475180098004-ca77a66827be?q=80&w=1972&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1475180098004-ca77a66827be?q=80&w=1972&auto=format&fit=crop",
     isNew: false,
   },
   {
     id: 8,
-    name: "Pleated Maxi Skirt",
-    price: 325,
-    category: "Bottoms",
-    image:
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop",
+    name: "Ankara Maxi Skirt",
+    price: 295,
+    category: "Dresses",
+    image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop",
     isNew: true,
   },
 ];
@@ -122,10 +113,10 @@ const CollectionsPage = () => {
             className="text-center z-10"
           >
             <span className="text-xs font-body tracking-wide-elegant uppercase text-primary mb-4 block">
-              Curated Selection
+              Authentic Ghanaian Fashion
             </span>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-foreground">
-              All <span className="italic">Collections</span>
+              Our <span className="italic">Collections</span>
             </h1>
           </motion.div>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -262,7 +253,7 @@ const CollectionsPage = () => {
                           {product.name}
                         </h3>
                         <p className="font-body text-sm text-foreground">
-                          ${product.price}
+                          GH₵{product.price.toLocaleString()}
                         </p>
                       </div>
                     </Link>
