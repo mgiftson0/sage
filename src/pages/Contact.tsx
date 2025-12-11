@@ -9,25 +9,25 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    details: "hello@afides.com",
-    link: "mailto:hello@afides.com",
+    details: "hello@afides.com.gh",
+    link: "mailto:hello@afides.com.gh",
   },
   {
     icon: Phone,
     title: "Phone",
-    details: "+1 (555) 123-4567",
-    link: "tel:+15551234567",
+    details: "+233 30 277 8899",
+    link: "tel:+233302778899",
   },
   {
     icon: MapPin,
-    title: "Address",
-    details: "123 Fashion District, New York, NY 10001",
+    title: "Showroom",
+    details: "12 Oxford Street, Osu, Accra, Ghana",
     link: "#",
   },
   {
     icon: Clock,
     title: "Hours",
-    details: "Mon-Fri: 9AM-6PM EST",
+    details: "Mon-Sat: 9AM-6PM GMT",
     link: "#",
   },
 ];
@@ -35,19 +35,23 @@ const contactInfo = [
 const faqs = [
   {
     question: "What is your return policy?",
-    answer: "We offer a 30-day return policy for all unworn items in their original condition with tags attached.",
+    answer: "We offer a 14-day return policy for all unworn items in their original condition with tags attached. Items must be returned to our Accra showroom or via our partnered courier.",
   },
   {
-    question: "How long does shipping take?",
-    answer: "Standard shipping takes 5-7 business days. Express shipping (2-3 days) is available at checkout.",
+    question: "How long does delivery take within Ghana?",
+    answer: "Within Accra: 1-2 business days. Other regions: 3-5 business days. Express delivery available for same-day delivery within Accra.",
   },
   {
     question: "Do you ship internationally?",
-    answer: "Yes, we ship to over 50 countries. International orders typically arrive within 10-14 business days.",
+    answer: "Yes! We ship to over 40 countries. International orders typically arrive within 7-14 business days. Customs and duties may apply.",
   },
   {
-    question: "How do I care for my garments?",
-    answer: "Each item comes with specific care instructions. Generally, we recommend gentle washing and air drying for longevity.",
+    question: "Are your products authentic handwoven?",
+    answer: "Absolutely. All our Kente pieces are handwoven by master artisans in Bonwire, Ashanti Region. Each piece comes with a certificate of authenticity.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept Mobile Money (MTN, Vodafone Cash, AirtelTigo Money), Visa, Mastercard, and bank transfers. Cash on delivery is available within Accra.",
   },
 ];
 
@@ -64,7 +68,7 @@ export default function Contact() {
     e.preventDefault();
     toast({
       title: "Message sent",
-      description: "We'll get back to you within 24 hours.",
+      description: "Medaase! We'll get back to you within 24 hours.",
     });
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
@@ -85,7 +89,8 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              We'd love to hear from you. Whether you have a question or just want to say hello.
+              We'd love to hear from you. Whether you have a question about our products, 
+              need styling advice, or want to visit our Accra showroom.
             </p>
           </motion.div>
 
@@ -141,8 +146,9 @@ export default function Contact() {
                     <option value="">Select a subject</option>
                     <option value="order">Order Inquiry</option>
                     <option value="product">Product Question</option>
-                    <option value="returns">Returns & Exchanges</option>
-                    <option value="partnership">Partnership</option>
+                    <option value="custom">Custom Orders</option>
+                    <option value="wholesale">Wholesale Partnership</option>
+                    <option value="showroom">Showroom Visit</option>
                     <option value="other">Other</option>
                   </select>
                 </div>

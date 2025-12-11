@@ -8,19 +8,19 @@ import { Footer } from "@/components/Footer";
 const initialCartItems = [
   {
     id: "1",
-    name: "Sage Linen Blazer",
-    price: 285,
+    name: "Royal Kente Blazer",
+    price: 850,
     size: "M",
-    color: "Sage",
+    color: "Gold & Green",
     quantity: 1,
     image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&auto=format&fit=crop",
   },
   {
     id: "2",
-    name: "Organic Cotton Dress",
-    price: 195,
+    name: "Ankara Print Dress",
+    price: 420,
     size: "S",
-    color: "Forest",
+    color: "Sunset Orange",
     quantity: 2,
     image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&auto=format&fit=crop",
   },
@@ -43,7 +43,7 @@ export default function Cart() {
   };
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = subtotal > 200 ? 0 : 15;
+  const shipping = subtotal > 500 ? 0 : 50;
   const total = subtotal + shipping;
 
   return (
@@ -111,7 +111,7 @@ export default function Cart() {
                             <Plus className="w-4 h-4" />
                           </button>
                         </div>
-                        <p className="font-medium text-foreground">${item.price * item.quantity}</p>
+                        <p className="font-medium text-foreground">GH₵{(item.price * item.quantity).toLocaleString()}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -130,21 +130,21 @@ export default function Cart() {
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span className="text-foreground">${subtotal}</span>
+                      <span className="text-foreground">GH₵{subtotal.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Shipping</span>
-                      <span className="text-foreground">{shipping === 0 ? "Free" : `$${shipping}`}</span>
+                      <span className="text-muted-foreground">Delivery (Ghana)</span>
+                      <span className="text-foreground">{shipping === 0 ? "Free" : `GH₵${shipping}`}</span>
                     </div>
                     {shipping > 0 && (
                       <p className="text-xs text-primary">
-                        Add ${200 - subtotal} more for free shipping
+                        Add GH₵{500 - subtotal} more for free delivery
                       </p>
                     )}
                   </div>
                   <div className="flex justify-between py-4 border-t border-border mb-6">
                     <span className="font-medium text-foreground">Total</span>
-                    <span className="font-medium text-foreground">${total}</span>
+                    <span className="font-medium text-foreground">GH₵{total.toLocaleString()}</span>
                   </div>
                   <button className="w-full bg-primary text-primary-foreground py-4 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
                     Checkout <ArrowRight className="w-4 h-4" />
@@ -152,11 +152,11 @@ export default function Cart() {
                   <div className="mt-6 space-y-3">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Truck className="w-4 h-4" />
-                      <span>Free shipping on orders over $200</span>
+                      <span>Free delivery on orders over GH₵500</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Lock className="w-4 h-4" />
-                      <span>Secure checkout</span>
+                      <span>Secure checkout with Mobile Money & Cards</span>
                     </div>
                   </div>
                 </div>

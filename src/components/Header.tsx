@@ -69,7 +69,7 @@ export const Header = () => {
                   AFIDES
                 </span>
                 <span className="text-[9px] tracking-wide-elegant uppercase text-muted-foreground font-body">
-                  Timeless Clothing
+                  Ghanaian Fashion House
                 </span>
               </motion.div>
             </Link>

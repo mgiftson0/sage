@@ -7,9 +7,9 @@ import { Newsletter } from "@/components/Newsletter";
 
 const featuredPost = {
   id: "1",
-  title: "The Art of Slow Fashion: Why Less is More",
-  excerpt: "Exploring the philosophy behind mindful clothing choices and building a wardrobe that lasts.",
-  category: "Philosophy",
+  title: "The Art of Kente Weaving: A Journey to Bonwire",
+  excerpt: "Discover the ancient craft of Kente weaving in the Ashanti Region, where master artisans create threads of gold and heritage.",
+  category: "Heritage",
   date: "December 8, 2024",
   readTime: "5 min read",
   image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1200&auto=format&fit=crop",
@@ -18,8 +18,8 @@ const featuredPost = {
 const posts = [
   {
     id: "2",
-    title: "Meet Our Artisans: The Hands Behind Your Clothes",
-    excerpt: "A behind-the-scenes look at the skilled craftspeople who bring our designs to life.",
+    title: "Meet Our Artisans: The Hands Behind Your Kente",
+    excerpt: "A behind-the-scenes look at the skilled craftspeople in Bonwire who bring our designs to life.",
     category: "People",
     date: "December 1, 2024",
     readTime: "4 min read",
@@ -27,17 +27,17 @@ const posts = [
   },
   {
     id: "3",
-    title: "Sustainable Fabrics: A Guide to Natural Materials",
-    excerpt: "Understanding the environmental impact of different textiles and making informed choices.",
-    category: "Materials",
+    title: "Understanding Adinkra Symbols in Fashion",
+    excerpt: "Learn the meanings behind the ancient Akan symbols and how to wear them with intention.",
+    category: "Culture",
     date: "November 24, 2024",
     readTime: "6 min read",
     image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&auto=format&fit=crop",
   },
   {
     id: "4",
-    title: "Building a Capsule Wardrobe: Where to Start",
-    excerpt: "Practical tips for curating a versatile collection of timeless pieces.",
+    title: "Styling Ankara for Every Occasion",
+    excerpt: "From office to owambe, learn how to style African print for any event.",
     category: "Style Guide",
     date: "November 15, 2024",
     readTime: "7 min read",
@@ -45,17 +45,17 @@ const posts = [
   },
   {
     id: "5",
-    title: "The Journey of Organic Cotton",
-    excerpt: "From seed to garment: tracing the path of our most beloved material.",
-    category: "Materials",
+    title: "The History of Batakari: Northern Ghana's Pride",
+    excerpt: "Exploring the rich tradition of hand-woven smocks from Tamale and Bolgatanga.",
+    category: "Heritage",
     date: "November 8, 2024",
     readTime: "5 min read",
     image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=600&auto=format&fit=crop",
   },
   {
     id: "6",
-    title: "Caring for Your Clothing: Tips for Longevity",
-    excerpt: "Simple practices to extend the life of your favorite pieces.",
+    title: "Caring for Your Kente: Tips for Longevity",
+    excerpt: "Preserve your investment with these expert tips on maintaining handwoven textiles.",
     category: "Care Guide",
     date: "October 30, 2024",
     readTime: "4 min read",
@@ -63,7 +63,7 @@ const posts = [
   },
 ];
 
-const categories = ["All", "Philosophy", "Materials", "Style Guide", "People", "Care Guide"];
+const categories = ["All", "Heritage", "Culture", "Style Guide", "People", "Care Guide"];
 
 export default function Journal() {
   return (
@@ -82,7 +82,7 @@ export default function Journal() {
               Journal
             </h1>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Stories of craftsmanship, sustainability, and the art of mindful dressing
+              Stories of Ghanaian craftsmanship, culture, and the art of African fashion
             </p>
           </motion.div>
 

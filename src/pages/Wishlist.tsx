@@ -8,20 +8,20 @@ import { Footer } from "@/components/Footer";
 const initialWishlistItems = [
   {
     id: "1",
-    name: "Sage Linen Blazer",
-    price: 285,
+    name: "Royal Kente Blazer",
+    price: 850,
     image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&auto=format&fit=crop",
   },
   {
     id: "2",
-    name: "Organic Cotton Dress",
-    price: 195,
+    name: "Ankara Print Dress",
+    price: 420,
     image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&auto=format&fit=crop",
   },
   {
     id: "3",
-    name: "Wool Cashmere Coat",
-    price: 495,
+    name: "Fugu Northern Smock",
+    price: 380,
     image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600&auto=format&fit=crop",
   },
 ];
@@ -92,7 +92,7 @@ export default function Wishlist() {
                       {item.name}
                     </h3>
                   </Link>
-                  <p className="text-foreground">${item.price}</p>
+                  <p className="text-foreground">GH₵{item.price.toLocaleString()}</p>
                 </motion.div>
               ))}
             </div>

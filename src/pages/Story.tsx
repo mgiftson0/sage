@@ -5,28 +5,28 @@ import { Newsletter } from "@/components/Newsletter";
 
 const values = [
   {
-    title: "Sustainable Sourcing",
-    description: "We partner with certified organic farms and mills that share our commitment to environmental stewardship.",
+    title: "Preserving Heritage",
+    description: "We work directly with master weavers in Bonwire and artisans across Ghana to keep traditional techniques alive for future generations.",
     image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&auto=format&fit=crop",
   },
   {
-    title: "Ethical Production",
-    description: "Every garment is crafted in fair-wage facilities where artisans are valued and respected.",
+    title: "Empowering Communities",
+    description: "Every purchase supports Ghanaian artisans and their families, providing fair wages and sustainable livelihoods.",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop",
   },
   {
-    title: "Timeless Design",
-    description: "We create pieces meant to transcend seasons, becoming cherished parts of your wardrobe for years.",
+    title: "Modern African Elegance",
+    description: "We blend centuries-old craftsmanship with contemporary design, creating pieces that honor tradition while embracing the future.",
     image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop",
   },
 ];
 
 const timeline = [
-  { year: "2018", title: "The Beginning", description: "Founded with a vision to create clothing that respects both people and planet." },
-  { year: "2019", title: "First Collection", description: "Launched our debut collection featuring organic linens and sustainable cottons." },
-  { year: "2020", title: "Carbon Neutral", description: "Achieved carbon neutrality across all operations and shipping." },
-  { year: "2022", title: "B Corp Certified", description: "Joined the community of businesses meeting the highest standards of social and environmental performance." },
-  { year: "2024", title: "Today", description: "Continuing to push boundaries in sustainable fashion while serving customers worldwide." },
+  { year: "2019", title: "Founded in Accra", description: "Started by Akua Mensah with a vision to bring authentic Ghanaian fashion to the world while supporting local artisans." },
+  { year: "2020", title: "First Kente Collection", description: "Launched our debut collection featuring handwoven Kente from Bonwire, Ashanti Region." },
+  { year: "2021", title: "Artisan Partnerships", description: "Expanded our network to include weavers from Northern Ghana, bringing Batakari/Fugu to our collections." },
+  { year: "2022", title: "International Recognition", description: "Featured at Africa Fashion Week and began shipping to over 30 countries worldwide." },
+  { year: "2024", title: "Growing Impact", description: "Now supporting over 50 artisan families across Ghana while expanding our sustainable practices." },
 ];
 
 export default function Story() {
@@ -39,8 +39,8 @@ export default function Story() {
         <section className="relative h-[60vh] lg:h-[70vh] overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1920&auto=format&fit=crop"
-              alt="Our story"
+              src="https://images.unsplash.com/photo-1590735213920-68192a487bc2?w=1920&auto=format&fit=crop"
+              alt="Ghanaian artisan weaving"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-foreground/40" />
@@ -55,7 +55,7 @@ export default function Story() {
                 Our Story
               </h1>
               <p className="text-background/90 text-lg lg:text-xl max-w-2xl mx-auto">
-                A journey towards mindful fashion, crafted with purpose
+                Celebrating Ghana's rich textile heritage, one thread at a time
               </p>
             </motion.div>
           </div>
@@ -80,7 +80,7 @@ export default function Story() {
                 transition={{ delay: 0.1 }}
                 className="font-display text-3xl lg:text-4xl font-medium text-foreground mb-8 leading-relaxed"
               >
-                We believe that beautiful clothing should never come at the cost of our planet or its people.
+                We believe that every piece of cloth tells a story—of culture, of craftsmanship, of community.
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -89,9 +89,10 @@ export default function Story() {
                 transition={{ delay: 0.2 }}
                 className="text-muted-foreground leading-relaxed"
               >
-                Afides was born from a simple question: what if fashion could be both elegant and ethical? 
-                We set out to prove that sustainability and style aren't mutually exclusive—they're essential partners 
-                in creating clothing that you can feel truly good about wearing.
+                Afides was born in Accra from a deep love for Ghana's textile heritage. We asked ourselves: 
+                how can we share the beauty of Kente, the artistry of Ankara, and the tradition of Batakari 
+                with the world while ensuring the artisans who create these masterpieces thrive? 
+                Our answer is a fashion house that puts people and heritage at the heart of everything we do.
               </motion.p>
             </div>
           </div>
@@ -182,11 +183,11 @@ export default function Story() {
               className="max-w-3xl mx-auto text-center"
             >
               <p className="font-display text-2xl lg:text-3xl font-medium text-primary-foreground mb-6 leading-relaxed">
-                "Fashion is not just about looking good—it's about feeling good about the choices we make. 
-                At Afides, every thread tells a story of care, craft, and consciousness."
+                "Every Kente cloth carries the wisdom of our ancestors. At Afides, 
+                we don't just sell clothing—we share stories woven in gold, green, and the spirit of Ghana."
               </p>
               <cite className="text-primary-foreground/80 text-sm tracking-elegant uppercase not-italic">
-                — Elena Chen, Founder
+                — Akua Mensah, Founder
               </cite>
             </motion.blockquote>
           </div>
