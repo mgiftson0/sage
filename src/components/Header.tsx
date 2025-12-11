@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, User, Menu, X, Search } from "lucide-react";
+import { ShoppingBag, User, Menu, X, Search, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navLinks = [
@@ -8,6 +8,7 @@ const navLinks = [
   { name: "New Arrivals", href: "/new-arrivals" },
   { name: "Story", href: "/story" },
   { name: "Journal", href: "/journal" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export const Header = () => {
@@ -94,6 +95,13 @@ export const Header = () => {
               >
                 <Search className="w-5 h-5" />
               </button>
+              <Link
+                to="/wishlist"
+                className="hidden lg:block p-2 text-foreground hover:text-primary transition-colors"
+                aria-label="Wishlist"
+              >
+                <Heart className="w-5 h-5" />
+              </Link>
               <Link
                 to="/account"
                 className="hidden lg:block p-2 text-foreground hover:text-primary transition-colors"
