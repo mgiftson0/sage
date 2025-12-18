@@ -17,36 +17,56 @@ import Journal from "./pages/Journal";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import { SiteContentProvider } from "./context/SiteContentContext";
+import { AdminLayout } from "./admin/layout/AdminLayout";
+import AdminDashboard from "./admin/pages/AdminDashboard";
+import AdminHeroConfig from "./admin/pages/AdminHeroConfig";
+import AdminPhilosophyConfig from "./admin/pages/AdminPhilosophyConfig";
+import AdminCollections from "./admin/pages/AdminCollections";
+import AdminProducts from "./admin/pages/AdminProducts";
+
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/collections" element={<Collections />} />
-          <Route path="/collections/:id" element={<Collections />} />
-          <Route path="/new-arrivals" element={<Collections />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/lookbook" element={<Lookbook />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/story" element={<Story />} />
-          <Route path="/journal" element={<Journal />} />
-          <Route path="/journal/:id" element={<Journal />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <SiteContentProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/collections" element={<Collections />} />
+            <Route path="/collections/:id" element={<Collections />} />
+            <Route path="/new-arrivals" element={<Collections />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/lookbook" element={<Lookbook />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/story" element={<Story />} />
+            <Route path="/journal" element={<Journal />} />
+            <Route path="/journal/:id" element={<Journal />} />
+            <Route path="/contact" element={<Contact />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="hero" element={<AdminHeroConfig />} />
+              <Route path="philosophy" element={<AdminPhilosophyConfig />} />
+              <Route path="collections" element={<AdminCollections />} />
+              <Route path="products" element={<AdminProducts />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </SiteContentProvider>
   </QueryClientProvider>
 );
 

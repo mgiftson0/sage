@@ -1,7 +1,10 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
+import { useSiteContent } from "@/context/SiteContentContext";
+
 export const Philosophy = () => {
+  const { config } = useSiteContent();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -22,12 +25,7 @@ export const Philosophy = () => {
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="font-display text-lg md:text-xl text-sage-400 whitespace-nowrap"
             >
-              Crafted to outlive the trends. Designed to acquire character. True
-              luxury is not about the newness of the object, but the story it
-              gathers with time. •{" "}
-              Crafted to outlive the trends. Designed to acquire character. True
-              luxury is not about the newness of the object, but the story it
-              gathers with time. •
+              {config.philosophyContent} • {config.philosophyContent} •
             </motion.p>
           </div>
 
@@ -39,7 +37,7 @@ export const Philosophy = () => {
             className="text-center mb-20"
           >
             <span className="text-xs font-body tracking-wide-elegant uppercase text-primary mb-4 block">
-              Our Philosophy
+              {config.philosophyTitle}
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground">
               The <span className="italic">AFIDES</span> Way

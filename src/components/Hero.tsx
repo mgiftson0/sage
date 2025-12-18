@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export const Hero = () => {
+  const { config } = useSiteContent();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -42,7 +44,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-xs font-body tracking-wide-elegant uppercase text-muted-foreground mb-6"
           >
-            Est. 2024 • Sustainable • Timeless
+            {config.heroSubtitle}
           </motion.p>
 
           <motion.h1
@@ -51,9 +53,7 @@ export const Hero = () => {
             transition={{ duration: 1, delay: 0.7 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-foreground mb-6 tracking-wide"
           >
-            The Essence of
-            <br />
-            <span className="italic font-normal">Timeless Style</span>
+            {config.heroTitle}
           </motion.h1>
 
           <motion.p
@@ -79,7 +79,7 @@ export const Hero = () => {
             className="relative aspect-[4/5] overflow-hidden rounded-t-lg shadow-elevated"
           >
             <img
-              src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop"
+              src={config.heroImage}
               alt="Elegant clothing showcase"
               className="w-full h-full object-cover object-top"
             />
