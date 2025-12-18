@@ -1,55 +1,21 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Minus, Plus, X, ShoppingBag, ArrowRight, Truck, Lock } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-
-const initialCartItems = [
-  {
-    id: "1",
-    name: "Royal Kente Blazer",
-    price: 850,
-    size: "M",
-    color: "Gold & Green",
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&auto=format&fit=crop",
-  },
-  {
-    id: "2",
-    name: "Ankara Print Dress",
-    price: 420,
-    size: "S",
-    color: "Sunset Orange",
-    quantity: 2,
-    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&auto=format&fit=crop",
-  },
-];
+import { useCart } from "@/context/CartContext";
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const { cartItems, updateQuantity, removeFromCart, cartTotal } = useCart();
+  const navigate = useNavigate();
 
-  const updateQuantity = (id: string, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: string) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = subtotal > 500 ? 0 : 50;
-  const total = subtotal + shipping;
+  const shipping = cartTotal > 500 ? 0 : 50;
+  const total = cartTotal + shipping;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-28 lg:pt-32 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.h1
@@ -72,18 +38,18 @@ export default function Cart() {
                     transition={{ delay: index * 0.1 }}
                     className="flex gap-6 p-6 bg-card border border-border"
                   >
-                    <Link to={`/product/${item.id}`} className="w-24 h-32 flex-shrink-0 bg-secondary overflow-hidden">
+                    <Link to={`/product/${item.productId}`} className="w-24 h-32 flex-shrink-0 bg-secondary overflow-hidden">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </Link>
                     <div className="flex-1 flex flex-col">
                       <div className="flex items-start justify-between mb-2">
-                        <Link to={`/product/${item.id}`}>
+                        <Link to={`/product/${item.productId}`}>
                           <h3 className="font-display text-lg font-medium text-foreground hover:text-primary transition-colors">
                             {item.name}
                           </h3>
                         </Link>
                         <button
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removeFromCart(item.id)}
                           className="p-1 text-muted-foreground hover:text-foreground transition-colors"
                           aria-label="Remove item"
                         >
@@ -130,7 +96,7 @@ export default function Cart() {
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span className="text-foreground">GH₵{subtotal.toLocaleString()}</span>
+                      <span className="text-foreground">GH₵{cartTotal.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Delivery (Ghana)</span>
@@ -138,7 +104,7 @@ export default function Cart() {
                     </div>
                     {shipping > 0 && (
                       <p className="text-xs text-primary">
-                        Add GH₵{500 - subtotal} more for free delivery
+                        Add GH₵{500 - cartTotal} more for free delivery
                       </p>
                     )}
                   </div>
@@ -146,7 +112,10 @@ export default function Cart() {
                     <span className="font-medium text-foreground">Total</span>
                     <span className="font-medium text-foreground">GH₵{total.toLocaleString()}</span>
                   </div>
-                  <button className="w-full bg-primary text-primary-foreground py-4 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => navigate("/checkout")}
+                    className="w-full bg-primary text-primary-foreground py-4 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
+                  >
                     Checkout <ArrowRight className="w-4 h-4" />
                   </button>
                   <div className="mt-6 space-y-3">

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSiteContent } from "@/context/SiteContentContext";
+import { ImageUpload } from "@/admin/components/ImageUpload";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -20,7 +21,7 @@ const AdminHeroConfig = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        updateConfig(formData);
+        updateConfig({ ...config, ...formData });
         toast.success("Hero section updated successfully");
     };
 
@@ -52,12 +53,10 @@ const AdminHeroConfig = () => {
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="heroImage">Image URL</Label>
-                            <Input
-                                id="heroImage"
-                                name="heroImage"
+                            <Label>Hero Background Image</Label>
+                            <ImageUpload
                                 value={formData.heroImage}
-                                onChange={handleChange}
+                                onChange={(value) => setFormData({ ...formData, heroImage: value })}
                             />
                         </div>
                         <Button type="submit">Save Changes</Button>

@@ -5,71 +5,18 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
 
-const featuredPost = {
-  id: "1",
-  title: "The Art of Kente Weaving: A Journey to Bonwire",
-  excerpt: "Discover the ancient craft of Kente weaving in the Ashanti Region, where master artisans create threads of gold and heritage.",
-  category: "Heritage",
-  date: "December 8, 2024",
-  readTime: "5 min read",
-  image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1200&auto=format&fit=crop",
-};
-
-const posts = [
-  {
-    id: "2",
-    title: "Meet Our Artisans: The Hands Behind Your Kente",
-    excerpt: "A behind-the-scenes look at the skilled craftspeople in Bonwire who bring our designs to life.",
-    category: "People",
-    date: "December 1, 2024",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop",
-  },
-  {
-    id: "3",
-    title: "Understanding Adinkra Symbols in Fashion",
-    excerpt: "Learn the meanings behind the ancient Akan symbols and how to wear them with intention.",
-    category: "Culture",
-    date: "November 24, 2024",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&auto=format&fit=crop",
-  },
-  {
-    id: "4",
-    title: "Styling Ankara for Every Occasion",
-    excerpt: "From office to owambe, learn how to style African print for any event.",
-    category: "Style Guide",
-    date: "November 15, 2024",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&auto=format&fit=crop",
-  },
-  {
-    id: "5",
-    title: "The History of Batakari: Northern Ghana's Pride",
-    excerpt: "Exploring the rich tradition of hand-woven smocks from Tamale and Bolgatanga.",
-    category: "Heritage",
-    date: "November 8, 2024",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=600&auto=format&fit=crop",
-  },
-  {
-    id: "6",
-    title: "Caring for Your Kente: Tips for Longevity",
-    excerpt: "Preserve your investment with these expert tips on maintaining handwoven textiles.",
-    category: "Care Guide",
-    date: "October 30, 2024",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&auto=format&fit=crop",
-  },
-];
-
-const categories = ["All", "Heritage", "Culture", "Style Guide", "People", "Care Guide"];
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function Journal() {
+  const { journalPosts } = useSiteContent();
+  const featuredPost = journalPosts[0];
+  const posts = journalPosts.slice(1);
+  const categories = ["All", ...Array.from(new Set(journalPosts.map(p => p.category)))];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-28 lg:pt-32 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
           {/* Header */}
@@ -96,11 +43,10 @@ export default function Journal() {
             {categories.map((category) => (
               <button
                 key={category}
-                className={`px-5 py-2 text-sm font-medium tracking-elegant uppercase transition-colors ${
-                  category === "All"
+                className={`px-5 py-2 text-sm font-medium tracking-elegant uppercase transition-colors ${category === "All"
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
-                }`}
+                  }`}
               >
                 {category}
               </button>

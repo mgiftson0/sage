@@ -5,74 +5,10 @@ import { Footer } from "@/components/Footer";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const lookbookSeasons = [
-  {
-    id: "aw24",
-    season: "Harmattan 2024",
-    title: "Echoes of Ashanti",
-    description: "A celebration of royal heritage through contemporary silhouettes. Inspired by the golden era of the Ashanti Kingdom.",
-    images: [
-      {
-        id: 1,
-        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1962&auto=format&fit=crop",
-        title: "Royal Kente Ensemble",
-        aspect: "portrait",
-      },
-      {
-        id: 2,
-        image: "https://images.unsplash.com/photo-1475180098004-ca77a66827be?q=80&w=1972&auto=format&fit=crop",
-        title: "Adinkra Elegance",
-        aspect: "square",
-      },
-      {
-        id: 3,
-        image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1976&auto=format&fit=crop",
-        title: "Modern Fugu",
-        aspect: "landscape",
-      },
-      {
-        id: 4,
-        image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop",
-        title: "Golden Coast",
-        aspect: "portrait",
-      },
-    ],
-  },
-  {
-    id: "ss24",
-    season: "Rainy Season 2024",
-    title: "Volta Reflections",
-    description: "Fluid forms and natural textures inspired by the serene waters of Lake Volta and the lush greenery of the Eastern Region.",
-    images: [
-      {
-        id: 5,
-        image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop",
-        title: "River Flow Dress",
-        aspect: "portrait",
-      },
-      {
-        id: 6,
-        image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop",
-        title: "Botanical Print",
-        aspect: "landscape",
-      },
-      {
-        id: 7,
-        image: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=1886&auto=format&fit=crop",
-        title: "Emerald Garden",
-        aspect: "square",
-      },
-      {
-        id: 8,
-        image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop",
-        title: "Lakeside Serenity",
-        aspect: "portrait",
-      },
-    ],
-  },
-];
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const Lookbook = () => {
+  const { lookbookSeasons } = useSiteContent();
   const heroRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -143,24 +79,22 @@ const Lookbook = () => {
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-                    className={`group relative overflow-hidden rounded-sm cursor-pointer ${
-                      item.aspect === "portrait"
+                    className={`group relative overflow-hidden rounded-sm cursor-pointer ${item.aspect === "portrait"
                         ? "row-span-2"
                         : item.aspect === "landscape"
-                        ? "col-span-2"
-                        : ""
-                    }`}
+                          ? "col-span-2"
+                          : ""
+                      }`}
                   >
                     <motion.div
                       whileHover={{ scale: 1.03 }}
                       transition={{ duration: 0.6 }}
-                      className={`relative overflow-hidden ${
-                        item.aspect === "portrait"
+                      className={`relative overflow-hidden ${item.aspect === "portrait"
                           ? "aspect-[3/5]"
                           : item.aspect === "landscape"
-                          ? "aspect-[16/9]"
-                          : "aspect-square"
-                      }`}
+                            ? "aspect-[16/9]"
+                            : "aspect-square"
+                        }`}
                     >
                       <img
                         src={item.image}

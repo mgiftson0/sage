@@ -1,99 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
 import { Heart, Minus, Plus, Share2, Truck, RotateCcw, Shield, ChevronRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
-
-const products = {
-  "1": {
-    id: "1",
-    name: "Royal Kente Blazer",
-    price: 850,
-    description: "Handwoven by master artisans in Bonwire, Ashanti Region, this stunning Kente blazer features traditional Adinkra symbols representing wisdom and strength. A statement piece for special occasions.",
-    details: [
-      "100% Handwoven Kente Cloth",
-      "Made by Bonwire artisans",
-      "Traditional Adinkra patterns",
-      "Silk lining",
-      "Made in Ghana",
-    ],
-    care: "Dry clean only. Store flat to preserve weave integrity.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: [
-      { name: "Gold & Green", hex: "#DAA520" },
-      { name: "Red & Black", hex: "#8B0000" },
-      { name: "Blue & Gold", hex: "#1E3A5F" },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&auto=format&fit=crop",
-    ],
-  },
-  "2": {
-    id: "2",
-    name: "Ankara Print Dress",
-    price: 420,
-    description: "A flowing midi dress crafted from premium African wax print fabric. Features a flattering wrap silhouette with traditional Ghanaian patterns celebrating our rich cultural heritage.",
-    details: [
-      "100% Premium African Wax Print",
-      "Wrap-style silhouette",
-      "Hidden side pockets",
-      "Adjustable tie waist",
-      "Handmade in Accra",
-    ],
-    care: "Machine wash cold, gentle cycle. Hang dry.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: [
-      { name: "Sunset Orange", hex: "#E65C00" },
-      { name: "Ocean Blue", hex: "#0077BE" },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&auto=format&fit=crop",
-    ],
-  },
-  "3": {
-    id: "3",
-    name: "Fugu Northern Smock",
-    price: 380,
-    description: "Traditional hand-woven smock from Northern Ghana, known locally as Batakari or Fugu. This cultural masterpiece is made using centuries-old techniques passed down through generations.",
-    details: [
-      "Hand-woven cotton strips",
-      "Traditional Northern Ghana design",
-      "Hand-embroidered neckline",
-      "Unisex styling",
-      "Made in Tamale",
-    ],
-    care: "Hand wash recommended. Air dry in shade.",
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    colors: [
-      { name: "Natural White", hex: "#F5F5DC" },
-      { name: "Earth Brown", hex: "#8B4513" },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&auto=format&fit=crop",
-    ],
-  },
-};
+import { useSiteContent } from "@/context/SiteContentContext";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const product = products[id as keyof typeof products] || products["1"];
-  
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const { products } = useSiteContent();
+  const { addToCart } = useCart();
+
+  const product = products.find(p => p.id === id) || products[0]; // Fallback to first if not found
+
+  // Mocking extra details not in simple product model
+  const details = [
+    "Premium Material Sourcing",
+    "Handcrafted with care",
+    "Authentic Design",
+    "Sustainable Production",
+    "Made for longevity",
+  ];
+  const colors = [
+    { name: "Standard", hex: "#000000" },
+    { name: "Gold", hex: "#DAA520" },
+    { name: "Natural", hex: "#F5F5DC" },
+  ];
+  const sizes = ["S", "M", "L", "XL"];
+
+  const [selectedSize, setSelectedSize] = useState(sizes[1]);
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
+  // If we only have one image, make it an array
+  const images = [product?.image];
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addToCart({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: quantity,
+      size: selectedSize,
+      color: selectedColor.name
+    });
+  };
+
+  if (!product) return <div>Product not found</div>;
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-28 lg:pt-32">
         {/* Breadcrumb */}
         <div className="container mx-auto px-6 lg:px-12 mb-8">
@@ -121,23 +86,10 @@ export default function ProductDetail() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
-                  src={product.images[activeImage]}
+                  src={images[activeImage]}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
-              </div>
-              <div className="flex gap-3">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveImage(index)}
-                    className={`flex-1 aspect-square overflow-hidden bg-secondary rounded-sm transition-all ${
-                      activeImage === index ? "ring-2 ring-primary" : "opacity-60 hover:opacity-100"
-                    }`}
-                  >
-                    <img src={image} alt="" className="w-full h-full object-cover" />
-                  </button>
-                ))}
               </div>
             </motion.div>
 
@@ -162,15 +114,14 @@ export default function ProductDetail() {
                   Color: <span className="font-normal text-muted-foreground">{selectedColor.name}</span>
                 </p>
                 <div className="flex gap-3">
-                  {product.colors.map((color) => (
+                  {colors.map((color) => (
                     <button
                       key={color.name}
                       onClick={() => setSelectedColor(color)}
-                      className={`w-10 h-10 rounded-full transition-all ${
-                        selectedColor.name === color.name
+                      className={`w-10 h-10 rounded-full transition-all ${selectedColor.name === color.name
                           ? "ring-2 ring-offset-2 ring-primary"
                           : "hover:scale-110"
-                      }`}
+                        }`}
                       style={{ backgroundColor: color.hex }}
                       aria-label={color.name}
                     />
@@ -187,15 +138,14 @@ export default function ProductDetail() {
                   </button>
                 </div>
                 <div className="flex gap-2">
-                  {product.sizes.map((size) => (
+                  {sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`w-12 h-12 border text-sm font-medium transition-all ${
-                        selectedSize === size
+                      className={`w-12 h-12 border text-sm font-medium transition-all ${selectedSize === size
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border text-foreground hover:border-primary"
-                      }`}
+                        }`}
                     >
                       {size}
                     </button>
@@ -227,16 +177,18 @@ export default function ProductDetail() {
 
               {/* Actions */}
               <div className="flex gap-3 mb-8">
-                <button className="flex-1 bg-primary text-primary-foreground py-4 px-8 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors">
+                <button
+                  onClick={handleAddToCart}
+                  className="flex-1 bg-primary text-primary-foreground py-4 px-8 font-medium tracking-elegant uppercase text-sm hover:bg-primary/90 transition-colors"
+                >
                   Add to Bag
                 </button>
                 <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className={`p-4 border transition-colors ${
-                    isWishlisted
+                  onClick={() => { setIsWishlisted(!isWishlisted); toast.success(isWishlisted ? "Removed from wishlist" : "Added to wishlist"); }}
+                  className={`p-4 border transition-colors ${isWishlisted
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-border text-foreground hover:border-primary"
-                  }`}
+                    }`}
                   aria-label="Add to wishlist"
                 >
                   <Heart className={`w-5 h-5 ${isWishlisted ? "fill-current" : ""}`} />
@@ -274,7 +226,7 @@ export default function ProductDetail() {
                     <Minus className="w-4 h-4 hidden group-open:block" />
                   </summary>
                   <ul className="py-4 space-y-2 text-muted-foreground text-sm">
-                    {product.details.map((detail, index) => (
+                    {details.map((detail, index) => (
                       <li key={index}>• {detail}</li>
                     ))}
                   </ul>
@@ -285,7 +237,7 @@ export default function ProductDetail() {
                     <Plus className="w-4 h-4 group-open:hidden" />
                     <Minus className="w-4 h-4 hidden group-open:block" />
                   </summary>
-                  <p className="py-4 text-muted-foreground text-sm">{product.care}</p>
+                  <p className="py-4 text-muted-foreground text-sm">Dry clean recommended for silk and delicate fabrics. Cold hand wash for cottons.</p>
                 </details>
               </div>
             </motion.div>
@@ -294,8 +246,8 @@ export default function ProductDetail() {
 
         <Newsletter />
       </main>
-
       <Footer />
     </div>
   );
 }
+

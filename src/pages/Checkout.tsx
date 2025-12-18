@@ -8,39 +8,50 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ShieldCheck, Truck, CreditCard } from "lucide-react";
-import { Link } from "react-router-dom";
-
-const cartItems = [
-  {
-    id: "1",
-    name: "Kente Silk Wrap Dress",
-    price: 1250,
-    quantity: 1,
-    size: "M",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    id: "2",
-    name: "Adinkra Print Blazer",
-    price: 890,
-    quantity: 1,
-    size: "L",
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=400&auto=format&fit=crop",
-  },
-];
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
+import { useSiteContent } from "@/context/SiteContentContext";
+import { toast } from "sonner";
 
 const Checkout = () => {
+  const { cartItems, cartTotal, clearCart } = useCart();
+  const { addOrder } = useSiteContent();
+  const navigate = useNavigate();
+
   const [paymentMethod, setPaymentMethod] = useState("momo");
   const [deliveryMethod, setDeliveryMethod] = useState("standard");
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const deliveryFee = deliveryMethod === "express" ? 80 : 40;
-  const total = subtotal + deliveryFee;
+  const total = cartTotal + deliveryFee;
+
+  const handlePlaceOrder = () => {
+    if (cartItems.length === 0) {
+      toast.error("Your cart is empty");
+      return;
+    }
+    if (!firstName || !email) {
+      toast.error("Please fill in your contact details");
+      return;
+    }
+
+    addOrder({
+      customer: firstName, // In a real app, this would be linked to a customer record
+      date: new Date().toISOString().split('T')[0],
+      total: total,
+      status: "Pending",
+      items: cartItems.reduce((acc, item) => acc + item.quantity, 0)
+    });
+
+    clearCart();
+    navigate("/order-success");
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
@@ -70,7 +81,7 @@ const Checkout = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" placeholder="Kwame" />
+                    <Input id="firstName" placeholder="Kwame" value={firstName} onChange={e => setFirstName(e.target.value)} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
@@ -78,7 +89,7 @@ const Checkout = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="kwame@example.com" />
+                    <Input id="email" type="email" placeholder="kwame@example.com" value={email} onChange={e => setEmail(e.target.value)} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
@@ -224,7 +235,7 @@ const Checkout = () => {
                 className="bg-card border border-border rounded-lg p-6 sticky top-32"
               >
                 <h2 className="font-display text-xl text-foreground mb-6">Order Summary</h2>
-                
+
                 <div className="space-y-4 mb-6">
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex gap-4">
@@ -247,7 +258,7 @@ const Checkout = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span className="text-foreground">GH₵{subtotal.toLocaleString()}</span>
+                    <span className="text-foreground">GH₵{cartTotal.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Delivery</span>
@@ -262,7 +273,7 @@ const Checkout = () => {
                   <span className="text-foreground">GH₵{total.toLocaleString()}</span>
                 </div>
 
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-4">
+                <Button onClick={handlePlaceOrder} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-4">
                   Place Order
                 </Button>
 

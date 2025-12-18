@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Bell, Search, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function AdminHeader() {
     return (
@@ -23,6 +24,7 @@ export function AdminHeader() {
                         />
                     </div>
                 </form>
+                <ThemeToggle />
                 <Button variant="ghost" size="icon" className="rounded-full">
                     <Bell className="h-5 w-5" />
                     <span className="sr-only">Notifications</span>

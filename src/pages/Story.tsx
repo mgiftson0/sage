@@ -2,24 +2,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Newsletter } from "@/components/Newsletter";
-
-const values = [
-  {
-    title: "Preserving Heritage",
-    description: "We work directly with master weavers in Bonwire and artisans across Ghana to keep traditional techniques alive for future generations.",
-    image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&auto=format&fit=crop",
-  },
-  {
-    title: "Empowering Communities",
-    description: "Every purchase supports Ghanaian artisans and their families, providing fair wages and sustainable livelihoods.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop",
-  },
-  {
-    title: "Modern African Elegance",
-    description: "We blend centuries-old craftsmanship with contemporary design, creating pieces that honor tradition while embracing the future.",
-    image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop",
-  },
-];
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const timeline = [
   { year: "2019", title: "Founded in Accra", description: "Started by Akua Mensah with a vision to bring authentic Ghanaian fashion to the world while supporting local artisans." },
@@ -30,16 +13,18 @@ const timeline = [
 ];
 
 export default function Story() {
+  const { storyConfig } = useSiteContent();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-20 lg:pt-24">
         {/* Hero */}
         <section className="relative h-[60vh] lg:h-[70vh] overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1590735213920-68192a487bc2?w=1920&auto=format&fit=crop"
+              src={storyConfig.heroImage}
               alt="Ghanaian artisan weaving"
               className="w-full h-full object-cover"
             />
@@ -80,7 +65,7 @@ export default function Story() {
                 transition={{ delay: 0.1 }}
                 className="font-display text-3xl lg:text-4xl font-medium text-foreground mb-8 leading-relaxed"
               >
-                We believe that every piece of cloth tells a story—of culture, of craftsmanship, of community.
+                {storyConfig.missionText}
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -89,9 +74,9 @@ export default function Story() {
                 transition={{ delay: 0.2 }}
                 className="text-muted-foreground leading-relaxed"
               >
-                Afides was born in Accra from a deep love for Ghana's textile heritage. We asked ourselves: 
-                how can we share the beauty of Kente, the artistry of Ankara, and the tradition of Batakari 
-                with the world while ensuring the artisans who create these masterpieces thrive? 
+                Afides was born in Accra from a deep love for Ghana's textile heritage. We asked ourselves:
+                how can we share the beauty of Kente, the artistry of Ankara, and the tradition of Batakari
+                with the world while ensuring the artisans who create these masterpieces thrive?
                 Our answer is a fashion house that puts people and heritage at the heart of everything we do.
               </motion.p>
             </div>
@@ -110,9 +95,9 @@ export default function Story() {
               Our Values
             </motion.p>
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-              {values.map((value, index) => (
+              {storyConfig.values.map((value, index) => (
                 <motion.div
-                  key={value.title}
+                  key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -183,7 +168,7 @@ export default function Story() {
               className="max-w-3xl mx-auto text-center"
             >
               <p className="font-display text-2xl lg:text-3xl font-medium text-primary-foreground mb-6 leading-relaxed">
-                "Every Kente cloth carries the wisdom of our ancestors. At Afides, 
+                "Every Kente cloth carries the wisdom of our ancestors. At Afides,
                 we don't just sell clothing—we share stories woven in gold, green, and the spirit of Ghana."
               </p>
               <cite className="text-primary-foreground/80 text-sm tracking-elegant uppercase not-italic">

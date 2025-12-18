@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useSiteContent } from "@/context/SiteContentContext";
+import { ImageUpload } from "@/admin/components/ImageUpload";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -84,8 +85,11 @@ export default function AdminProducts() {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="image">Image URL</Label>
-                                <Input id="image" value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} />
+                                <Label>Product Image</Label>
+                                <ImageUpload
+                                    value={formData.image}
+                                    onChange={(value) => setFormData({ ...formData, image: value })}
+                                />
                             </div>
                             <Button type="submit" className="w-full">{editingId ? "Update" : "Create"}</Button>
                         </form>
