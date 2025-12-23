@@ -37,6 +37,7 @@ export interface LookbookImage {
     aspect: "portrait" | "landscape" | "square";
 }
 
+
 export interface LookbookSeason {
     id: string;
     season: string;
